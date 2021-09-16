@@ -37,19 +37,19 @@ class User:
     @classmethod
     def add_user(cls, data):
         query = 'INSERT INTO users (first_name, last_name, email, password) VALUES ( %(first_name)s, %(last_name)s , %(email)s , %(password)s );'
-        new_user = connectToMySQL("loginAndReg_schema").query_db(query, data)
+        new_user = connectToMySQL('recipes_schema').query_db(query, data)
         return new_user
 
     @classmethod
     def get_by_id(cls, data):
         query = 'SELECT * FROM users WHERE id = %(id)s ;'
-        results = connectToMySQL('loginAndReg_schema').query_db(query, data)
+        results = connectToMySQL('recipes_schema').query_db(query, data)
         return cls(results[0])
 
     @classmethod
     def get_by_email(cls, data):
         query = 'SELECT * FROM users WHERE email = %(email)s'
-        results = connectToMySQL('loginAndReg_schema').query_db(query, data)
+        results = connectToMySQL('recipes_schema').query_db(query, data)
 
         if len(results) < 1:
                 return False

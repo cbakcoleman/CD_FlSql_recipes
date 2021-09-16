@@ -26,7 +26,7 @@ def add_user():
     user_id = User.add_user(data)
     session['user_id'] = user_id
 
-    return redirect(f'/success/{user_id}')
+    return redirect('/dashboard')
 
 @app.route('/login', methods=['post'])
 def login():
@@ -42,13 +42,15 @@ def login():
 
     session['user_id'] = user.id
 
-    return redirect(f'/success/{session["user_id"]}')
+    return redirect('/dashboard')
 
 @app.route('/logout')
 def logout():
     session.clear()
     return redirect('/')
 
+
+#MAY DELETE THIS ROUTE!
 @app.route('/success/<id>')
 def success(id):
     if not session['user_id']:
