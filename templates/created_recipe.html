@@ -11,7 +11,7 @@
     <div class='container'>
         <div class='row mt-5 text-info'>
             <div class='col'>
-                <h4>Welcome {{ session[user.first_name] }}!</h4>
+                <h4>Welcome {{ user.first_name }}!!</h4>
             </div>
             <div class='col'>
                 <a class='text-info' href='/PUT SOMETHING HERE'>Dashboard</a>
@@ -19,13 +19,33 @@
             </div>
         </div> <!-- END ROW -->
 
-        <div class='row'>
+        <div class='mt-2 row'>
+            <h4>{{ recipe.name }}</h4>
             <div class='col'>
-                <h4>{{ recipe.name }}</h4>
-                <div class='card'>
-
-                </div>
-            </div>
+                <div class='p-3 card bg-light' style='width: 40rem;'>
+                    <table class='table'>
+                        <tr>
+                            <td class='col-sm-1'>Name:</td>
+                            <td>{{ recipe.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Under 30 Minutes:</td>
+                            <td>{{ recipe.under_30 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td>{{ recipe.description }}</td>
+                        </tr>
+                        <tr>
+                            <td>Instructions:</td>
+                            <td>{{ recipe.instructions }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date Made:</td>
+                            <td>{{ recipe.created_at.strftime('%m-%d-%Y') }}</td>
+                        </tr>
+                    </table>
+                </div> <!-- END CARD -->
         </div> <!-- END ROW -->
 </body>
 </html>

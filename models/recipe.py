@@ -41,5 +41,6 @@ class Recipe:
     @classmethod
     def get_ind(cls, id):
         query = 'SELECT * FROM recipes WHERE ID = %(id)s ;'
+        print(query)
         ind_recipe = connectToMySQL('recipes_schema').query_db( query, id )
         return cls(ind_recipe[0])

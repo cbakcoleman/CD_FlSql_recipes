@@ -26,11 +26,12 @@ def create_recipe():
         'under_30' : request.form['under_30'],
         'user_id' : session['user_id']
     }
+    print(data)
     new_recipe = Recipe.create_recipe(data)
-    return redirect(f'/recipe/{new_recipe['id']}')
+    return redirect(f'/recipe/{new_recipe}')
 
 @app.route('/recipe/<id>')
 def show_recipe(id):
-    
-    ind_recipe = Recipe.get_ind({ 'id' : id })
-    return render_template('created_recipe.html', recipe = ind_recipe)
+    user = User.get_by_id({ 'id' : session['user_id']})
+    recipe = Recipe.get_ind({ 'id' : id })
+    return render_template('created_recipe.html', recipe = recipe, user = user)
