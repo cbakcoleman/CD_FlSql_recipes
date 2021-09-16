@@ -13,6 +13,9 @@
             <div class='col'>
                 <h3>Welcome {{ user.first_name }}!</h3>
             </div>
+            <div class='col'>
+                <a class='text-info' href='/logout'>Logout</a>
+            </div>
         </div> <!-- END ROW -->
 
         <div class='row mt-2'>
@@ -33,11 +36,13 @@
                             <tr scope='row'>
                                 <td>{{ recipe.name }}</td>
                                 <td>{{ recipe.under_30 }}</td>
+                                {% if recipe.user_id == session['user.id'] %}
                                 <td>
                                     <a href='/recipe/{{ recipe.id }}'>View Instructions | </a>
                                     <a href='/recipes/edit/{{ recipe.id }}'>Edit |</a>
                                     <a href='/delete_recipe'>Delete</a>
                                 </td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
 

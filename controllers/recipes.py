@@ -31,18 +31,21 @@ def create_recipe():
 
 @app.route('/recipe/<id>')
 def show_recipe(id):
+    
     user = User.get_by_id({ 'id' : session['user_id']})
     recipe = Recipe.get_ind({ 'id' : id })
+    
     return render_template('/created_recipe.html', recipe = recipe, user = user)
 
 @app.route('/recipes/edit/<id>')
 def edit_recipe(id):
     user = User.get_by_id({ 'id' : session['user_id']})
     recipe = Recipe.get_ind({ 'id' : id })
+    #session['recipe_id'] = recipe
     return render_template('/edit_recipe.html', recipe = recipe, user = user)
 
-@app.route('/update_recipe', methods=['post'])
-def update_recipe():
+@app.route('/update_recipe/<id>', methods=['post'])
+def update_recipe(id):
     print(request.form)
     if not Recipe.validate_recipe(request.form):
         return redirect(f'/recipes/edit/{request.form["id"]}')
@@ -51,9 +54,11 @@ def update_recipe():
         'description' : request.form['description'],
         'instructions' : request.form['instructions'],
         'created_at' : request.form['created_at'],
-        'under_30' : request.form['under_30']
+        'under_30' : request.form['under_30'],
+        'id' : id
     }
     updated_recipe = Recipe.update_recipe(data)
+    session['recipe'] = updated_recipe
     return redirect(f'/recipe/{updated_recipe}')
 
 @app.route('/delete_recipe')

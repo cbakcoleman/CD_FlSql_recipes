@@ -49,11 +49,3 @@ def logout():
     session.clear()
     return redirect('/')
 
-
-#MAY DELETE THIS ROUTE!
-@app.route('/success/<id>')
-def success(id):
-    if not session['user_id']:
-        return redirect('/')
-    user = User.get_by_id({'id' :id}) 
-    return render_template('success.html', user = user)

@@ -40,8 +40,13 @@ class Recipe:
 
     @classmethod
     def get_ind(cls, id):
-        query = 'SELECT * FROM recipes WHERE ID = %(id)s ;'
+        query = 'SELECT * FROM recipes WHERE id = %(id)s ;'
+        print(type(id))
         ind_recipe = connectToMySQL('recipes_schema').query_db( query, id )
+        print('-----------')
+        print(query)
+        print(ind_recipe)
+        print(id)
         return cls(ind_recipe[0])
 
     @classmethod
@@ -54,7 +59,7 @@ class Recipe:
         return all_recipes
     
     @classmethod
-    def edit_recipe(cls, data):
+    def update_recipe(cls, data):
         query = "UPDATE recipes SET name = %(name)s, description= %(description)s, instructions= %(instructions)s, under_30 = %(under_30)s, created_at = %(created_at)s WHERE id = %(id)s ;"
         edited_recipe = connectToMySQL('recipes_schema').query_db( query, data )
-        return edited_recipe
+        return data['id']

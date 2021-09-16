@@ -21,7 +21,7 @@
         </div> <!-- END ROW -->
 
         <div class='row'>
-            <form class='text-light' action='/update_recipe' method='post'>
+            <form class='text-light' action='/update_recipe/{{ recipe.id }}' method='post'>
 
                 <div class='col m-1 card bg-dark p-3'>
                     <div class='form-group'>
@@ -51,7 +51,7 @@
     
                 <div class='col m-1 card bg-dark p-3'>
                     <div class='form-group'>
-                        <label for='created_at'>Date Updated:</label>
+                        <label for='created_at'>Made on:</label>
                         <input type='date' name='created_at' value=''>
                         {% for message in get_flashed_messages(category_filter = ['created_at']) %}
                             <p class='alert alert-warning'>{{ message }}</p>
