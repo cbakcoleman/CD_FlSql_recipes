@@ -15,7 +15,9 @@ def add_recipe():
     return render_template('/add_recipe.html')
 
 @app.route('/create_recipe', methods=['post'])
-def submit_recipe():
+def create_recipe():
+    if not Recipe.validate_recipe(request.form):
+        return redirect('/recipes/new')
     data = {
         'name' : request.form['name'],
         'description' : request.form['description'],
@@ -24,5 +26,11 @@ def submit_recipe():
         'under_30' : request.form['under_30'],
         'user_id' : session['user_id']
     }
-    new_recipe = Recipe.add_recipe(data)
-    return redirect('/')
+    new_recipe = Recipe.create_recipe(data)
+    return redirect(f'/recipe/{new_recipe['id']}')
+
+@app.route('/recipe/<id>')
+def show_recipe(id):
+    
+    ind_recipe = Recipe.get_ind({ 'id' : id })
+    return render_template('created_recipe.html', recipe = ind_recipe)

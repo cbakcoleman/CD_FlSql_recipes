@@ -22,18 +22,24 @@ class Recipe:
             flash('Description must be at least 3 characters long', 'description')
             is_valid = False
         if len(recipe['instructions']) < 3:
-            flash('Instructions must be at least 3 characters long', 'instruction')
+            flash('Instructions must be at least 3 characters long', 'instructions')
             is_valid = False
         if len(recipe['created_at']) < 1:
             flash('Date can not be empty', 'created_at')
             is_valid = False
-        if len(recipe['under_30']) < 1:
-            flash('Under 30 mintues? can not be empy', 'under_30')
+        if 'under_30' not in recipe:
+            flash('Under 30 mintues? can not be empty', 'under_30')
             is_valid = False
         return is_valid
 
     @classmethod
-    def add_recipe(cls, data):
+    def create_recipe(cls, data):
         query = 'INSERT INTO recipes (name, description, instructions, under_30, created_at, user_id) VALUES ( %(name)s, %(description)s, %(instructions)s, %(under_30)s, %(created_at)s, %(user_id)s );'
         new_recipe_id = connectToMySQL('recipes_schema').query_db(query, data)
         return new_recipe_id
+
+    @classmethod
+    def get_ind(cls, id):
+        query = 'SELECT * FROM recipes WHERE ID = %(id)s ;'
+        ind_recipe = connectToMySQL('recipes_schema').query_db( query, id )
+        return cls(ind_recipe[0])

@@ -21,14 +21,14 @@
         </div> <!-- END ROW -->
 
         <div class='row'>
-            <form class='text-light action='/create_recipe' method='post'>
+            <form class='text-light' action='/create_recipe' method='post'>
 
                 <div class='col m-1 card bg-dark p-3'>
                     <div class='form-group'>
                         <label for='name'>Name:</label>
                         <input type='text' name='name' class='form-control'>
                         {% for message in get_flashed_messages(category_filter = ['name']) %}
-                            <p>{{ message }}</p>
+                            <p class='alert alert-warning'>{{ message }}</p>
                         {% endfor %}
                     </div> <!-- END FORM-GROUP -->
     
@@ -36,7 +36,7 @@
                         <label for='description'>Description:</label>
                         <textarea type='text' name='description' class='form-control' cols='30' rows='5'></textarea>
                         {% for message in get_flashed_messages(category_filter = ['description']) %}
-                            <p>{{ message }}</p>
+                            <p class='alert alert-warning'>{{ message }}</p>
                         {% endfor %}
                     </div> <!-- END FORM-GROUP -->
     
@@ -44,7 +44,7 @@
                         <label for='instructions'>Instructions:</label>
                         <textarea type='text' name='instructions' class='form-control' cols='30' rows='5'></textarea>
                         {% for message in get_flashed_messages(category_filter = ['instructions']) %}
-                            <p>{{ message }}</p>
+                            <p class='alert alert-warning'>{{ message }}</p>
                         {% endfor %}
                     </div> <!-- END FORM-GROUP -->
                 </div> <!-- END COL -->
@@ -54,7 +54,7 @@
                         <label for='created_at'>Date Made On:</label>
                         <input type='date' name='created_at' value=''>
                         {% for message in get_flashed_messages(category_filter = ['created_at']) %}
-                            <p>{{ message }}</p>
+                            <p class='alert alert-warning'>{{ message }}</p>
                         {% endfor %}
                     </div> <!-- END FORM-GROUP -->
     
@@ -65,7 +65,7 @@
                         <input type="radio" name='under_30' value='no'>
                         <label for='no'>No</label>
                         {% for message in get_flashed_messages(category_filter = ['under_30']) %}
-                            <p>{{ message }}</p>
+                            <p class='alert alert-warning'>{{ message }}</p>
                         {% endfor %}
                     </div> <!-- END FORM-GROUP -->
                 </div> <!-- END COL -->
