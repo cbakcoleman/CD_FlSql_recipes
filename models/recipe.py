@@ -41,6 +41,20 @@ class Recipe:
     @classmethod
     def get_ind(cls, id):
         query = 'SELECT * FROM recipes WHERE ID = %(id)s ;'
-        print(query)
         ind_recipe = connectToMySQL('recipes_schema').query_db( query, id )
         return cls(ind_recipe[0])
+
+    @classmethod
+    def get_all(cls):
+        query = 'SELECT * FROM recipes LEFT JOIN users on recipes.user_id = users.id;'
+        results = connectToMySQL('recipes_schema').query_db(query)
+        all_recipes = []
+        for row in results:
+            all_recipes.append(cls(row))
+        return all_recipes
+    
+    @classmethod
+    def edit_recipe(cls, data):
+        query = "UPDATE recipes SET name = %(name)s, description= %(description)s, instructions= %(instructions)s, under_30 = %(under_30)s, created_at = %(created_at)s WHERE id = %(id)s ;"
+        edited_recipe = connectToMySQL('recipes_schema').query_db( query, data )
+        return edited_recipe
